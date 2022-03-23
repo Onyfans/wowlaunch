@@ -12,25 +12,30 @@ Program that launches pre-bnet launcher versions of World of Warcraft and enters
     go build
     ```
 
-2. Copy the executable to somewhere on your `$PATH`
+2. Copy the executable to somewhere useful
 
     ```bash
     # Local bin dir
     cp wowlaunch $HOME/.local/bin
     
-    # there's always /usr/bin
+    # there's always /usr/bin on Linux
     sudo cp wowlaunch /usr/bin
+    ```
+
+    Windows users can just put it in a directory of their choice
+    ```cmd
+    mkdir C:\wowlaunch
+    cp wowlaunch C:\wowlaunch
     ```
 
 3. Copy the config file to a valid directory and rename it to `config.yaml`:
     ```bash
-    # XDG compliant config directory. This is the recommended option
+    # XDG compliant config directory. Recommended for Linux users
     mkdir -p $HOME/.config/wowlaunch
     cp exampleconfig.yaml $HOME/.config/wowlaunch/config.yaml
     
-    # The same directory as the wowlaunch executable
-    cp wowlaunch $HOME/.local/bin
-    cp exampleconfig $HOME/.local/bin/config.yaml
+    # The same directory as the wowlaunch executable. Recommended for Windows users
+    cp exampleconfig C:\wowlaunch\config.yaml
     ```
    
 4. Edit the config file:
