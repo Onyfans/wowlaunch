@@ -8,6 +8,8 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"path"
+	"runtime"
 )
 
 type Config struct {
@@ -27,7 +29,12 @@ func init() {
 	viper.SetDefault("delay", 5)
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
+
+	p, _ := os.Executable()
 	viper.AddConfigPath(".")
+	viper.AddConfigPath(path.Dir(p))
+	viper.AddConfigPath(`.config/wowlaunch/`)
+
 	err := viper.ReadInConfig()
 	if err != nil {
 		log.Fatalf("fatal error config file: %v \n", err)
@@ -72,7 +79,9 @@ func main() {
 	}
 
 	cmd := exec.Command("wine", c.Wowpath)
-	cmd.Env = append(os.Environ(), fmt.Sprintf("WINEPREFIX=%s", c.Wineprefix))
+	if runtime.GOOS != "windows" {
+		cmd.Env = append(os.Environ(), fmt.Sprintf("WINEPREFIX=%s", c.Wineprefix))
+	}
 	if err := cmd.Start(); err != nil {
 		log.Fatalf("fatal error: could not start wow. %v \n", err)
 	}
