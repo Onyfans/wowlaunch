@@ -1,0 +1,21 @@
+---
+# Configure the delay in seconds between starting the program and typing the
+# username & password into the Wow client. Tweak to fit your PC's speed
+delay: 7
+# Path to Wow.exe
+wowpath: "/home/$USERNAME/.wine/drive_c/World of Warcraft/Wow.exe"
+# WINEPREFIX for Linux users. Windows users can leave this as the default.
+# Do not remove it or you will break wowlaunch!
+wineprefix: "/home/$USERNAME/.wine"
+
+# Accounts must use the list syntax below
+accounts:
+   # name is the command you'll give to wowlaunch to pick your account
+   - name: 'main'
+     username: 'accountone'
+     password: 'somepassword'
+
+   - name: 'alt'
+     username: 'accounttwo'
+     password: 'someotherpassword'
+
