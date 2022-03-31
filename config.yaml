@@ -3,10 +3,18 @@
 # username & password into the Wow client. Tweak to fit your PC's speed
 delay: 7
 # Path to Wow.exe
-wowpath: "/home/$USERNAME/.wine/drive_c/World of Warcraft/Wow.exe"
+wowpath: "/home/$USER/.wine/Program Files (x86)/World of Warcraft/"
 # WINEPREFIX for Linux users. Windows users can leave this as the default.
 # Do not remove it or you will break wowlaunch!
-wineprefix: "/home/$USERNAME/.wine"
+wineprefix: "/home/$USER/.wine"
+# Region of client. If you downloaded the english client from Chromiecraft
+# then leave this as the default
+region: 'enUS'
+
+# Support for multiple servers
+servers:
+  - chromie: 'logon.chromiecraft.com'
+  - local: '192.168.1.18'
 
 # Accounts must use the list syntax below
 accounts:
@@ -14,8 +22,16 @@ accounts:
    - name: 'main'
      username: 'accountone'
      password: 'somepassword'
+     # must match the servers list above
+     server: 'chromie' # must match the servers list above
 
    - name: 'alt'
      username: 'accounttwo'
      password: 'someotherpassword'
+     server: 'chromie'
+
+   - name: 'local'
+     username: 'localgm'
+     password: 'password'
+     server: 'local'
 

@@ -16,6 +16,8 @@ type Config struct {
 	Delay      int
 	Wowpath    string
 	Wineprefix string
+	Region     string
+	Servers    map[string]string
 	Accounts   []Account
 }
 
@@ -23,6 +25,7 @@ type Account struct {
 	Name     string
 	Username string
 	Password string
+	Server   string
 }
 
 func init() {
@@ -78,13 +81,27 @@ func main() {
 		log.Fatalf("fatal error: %v \n", err)
 	}
 
-	cmd := exec.Command("wine", c.Wowpath)
-	if runtime.GOOS != "windows" {
+	realmpath := path.Join(c.Wowpath, "Data", c.Region, "realmlist.wtf")
+	realmfile, err := os.Create(realmpath)
+	if err != nil {
+		log.Fatalf("fatal error: could not find realmlist.wtf. %v\n", err)
+	}
+	if _, ok := c.Servers[c.Accounts[idx].Server]; !ok {
+		log.Fatalln("fatal error: failed to match server in account list to server list")
+	}
+	realmfile.WriteString(fmt.Sprintf("set realmlist %s", c.Servers[c.Accounts[idx].Server]))
+
+	var cmd *exec.Cmd
+	if runtime.GOOS == "windows" {
+		cmd = exec.Command(path.Join(c.Wowpath, "Wow.exe"))
+	} else {
+		cmd = exec.Command("wine", path.Join(c.Wowpath, "Wow.exe"))
 		cmd.Env = append(os.Environ(), fmt.Sprintf("WINEPREFIX=%s", c.Wineprefix))
 	}
 	if err := cmd.Start(); err != nil {
 		log.Fatalf("fatal error: could not start wow. %v \n", err)
 	}
+
 	rg.Sleep(c.Delay)
 	rg.TypeStr(c.Accounts[idx].Username)
 	rg.KeyTap("tab")
