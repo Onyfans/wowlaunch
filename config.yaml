@@ -2,7 +2,8 @@
 # Configure the delay in seconds between starting the program and typing the
 # username & password into the Wow client. Tweak to fit your PC's speed
 delay: 7
-# Path to Wow.exe
+# Path to the world of warcraft directory
+# On Windows the path will look something like "C:\World of Warcraft"
 wowpath: "/home/$USER/.wine/Program Files (x86)/World of Warcraft/"
 # WINEPREFIX for Linux users. Windows users can leave this as the default.
 # Do not remove it or you will break wowlaunch!
@@ -11,18 +12,16 @@ wineprefix: "/home/$USER/.wine"
 # then leave this as the default
 region: 'enUS'
 
-# Support for multiple servers
+# Support for multiple servers. Can be a domain name or an IP address
 servers:
   - chromie: 'logon.chromiecraft.com'
   - local: '192.168.1.18'
 
 # Accounts must use the list syntax below
 accounts:
-   # name is the command you'll give to wowlaunch to pick your account
-   - name: 'main'
+   - name: 'main' # The command you'll give to wowlaunch to pick your account, ex: wowlaunch main
      username: 'accountone'
      password: 'somepassword'
-     # must match the servers list above
      server: 'chromie' # must match the servers list above
 
    - name: 'alt'
