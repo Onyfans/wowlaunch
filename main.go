@@ -36,9 +36,13 @@ func init() {
 	p, _ := os.Executable()
 	viper.AddConfigPath(".")
 	viper.AddConfigPath(path.Dir(p))
-	viper.AddConfigPath(`.config/wowlaunch/`)
+	home, err := os.UserHomeDir()
+	if err != nil {
+		log.Fatalf("fatal error: could not find home dir. %v\n", err)
+	}
+	viper.AddConfigPath(path.Join(home, `.config/wowlaunch/`))
 
-	err := viper.ReadInConfig()
+	err = viper.ReadInConfig()
 	if err != nil {
 		log.Fatalf("fatal error config file: %v \n", err)
 	}
