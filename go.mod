@@ -1,4 +1,4 @@
-module wowlaunch
+module github.com/KarazhanChessClub/wowlaunch
 
 go 1.18
 
