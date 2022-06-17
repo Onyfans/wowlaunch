@@ -42,7 +42,7 @@ wowlaunch second
     ```bash
     git clone https://github.com/KarazhanChessClub/wowlaunch
     cd wowlaunch
-    go build
+    go build ./cmd/wowlaunch
     ```
 
 2. Copy the executable to somewhere useful
